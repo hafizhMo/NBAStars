@@ -11,7 +11,6 @@ import CoreData
 class PlayerLocalDataStore {
 
     private let context = CDManager.shared.context
-    private let teamDS = TeamLocalDataStore()
     
     func getAllPlayer() -> [Player] {
         let fetchRequest: NSFetchRequest = Player.fetchRequest()
@@ -32,8 +31,8 @@ class PlayerLocalDataStore {
                 player.image.generateImage { photo in
                     localPlayer.imagePhoto = photo
                 }
-//                print(player.team!)
-//                localPlayer.team = team.getTeam(team: player.team!)
+                
+                localPlayer.team = TeamLocalDataStore().getTeamByRecordName(recordName: player.teamID.recordName)
             }
             try context.save()
             context.reset()
@@ -43,22 +42,4 @@ class PlayerLocalDataStore {
         }
     }
     
-    func assignTeam(name: String, team: TeamModel) {
-        let fetchRequest: NSFetchRequest = Player.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name = %@", name)
-        
-        guard let player = try? context.fetch(fetchRequest).first else {
-            return
-        }
-        
-        do {
-            player.team = teamDS.getTeam(team: team)
-            
-            try context.save()
-//            context.reset()
-            print("### \(#function): inserted \(team.name)")
-        } catch {
-            print("### \(#function): Failed to insert team: \(error)")
-        }
-    }
 }

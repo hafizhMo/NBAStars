@@ -11,6 +11,7 @@
     <entity name="Position" representedClassName=".Position" syncable="YES">
         <attribute name="codeName" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="recordName" attributeType="String"/>
         <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Player" inverseName="position" inverseEntity="Player"/>
     </entity>
     <entity name="Team" representedClassName=".Team" syncable="YES">
@@ -19,6 +20,7 @@
         <attribute name="fullname" attributeType="String"/>
         <attribute name="imageLogo" optional="YES" attributeType="Binary"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="recordName" attributeType="String"/>
         <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Player" inverseName="team" inverseEntity="Player"/>
     </entity>
 </model>

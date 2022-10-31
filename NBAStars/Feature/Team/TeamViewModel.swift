@@ -24,8 +24,13 @@ class TeamViewModel {
     func fetchMember(){
         state = .onLoading
         
-        teams = repo.getAllTeam()
-        state = teams.isEmpty ? .onFailure : .onSuccess
+        repo.getTeams(successHandler: { datas in
+            self.teams = datas
+            self.state = datas.isEmpty ? .onFailure : .onSuccess
+        }) { error in
+            self.state = .onFailure
+            print("### \(#function): Failed to fetch players in remote: \(error ?? "")")
+        }
     }
     
 }

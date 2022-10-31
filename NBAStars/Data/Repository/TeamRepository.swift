@@ -18,7 +18,25 @@ class TeamRepository {
     
     static let shared = TeamRepository(localDataStore: TeamLocalDataStore(), remoteDataStore: TeamRemoteDataStore())
     
-    func getAllTeam() -> [Team] {
-        return localDataStore.getAllTeam()
+    func getTeams(successHandler: @escaping ([Team]) -> Void,
+                    failureHandler: @escaping (String?) -> Void) {
+        var teams = localDataStore.getAllTeam()
+        
+        if teams.isEmpty {
+            remoteDataStore.refresh { error in
+                if let error = error {
+                    failureHandler(error.localizedDescription)
+                }
+
+                DispatchQueue.global().async {
+                    self.localDataStore.insertBatch(teams: self.remoteDataStore.teams)
+
+                    teams = self.localDataStore.getAllTeam()
+                    successHandler(teams)
+                }
+            }
+            return
+        }
+        successHandler(teams)
     }
 }

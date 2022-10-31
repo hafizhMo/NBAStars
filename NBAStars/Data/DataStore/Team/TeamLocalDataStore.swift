@@ -12,37 +12,44 @@ class TeamLocalDataStore {
     
     private let context = CDManager.shared.context
     
-    func getTeam(team: TeamModel) -> Team? {
-        let fetchRequest: NSFetchRequest = Team.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name = %@", team.name)
-        
-        guard let team = try? context.fetch(fetchRequest).first else {
-            do {
-                let newTeam = Team(context: context)
-                newTeam.name = team.name
-                newTeam.fullname = team.fullname
-                newTeam.codeName = team.codeName
-                team.image.generateImage { photo in
-                    newTeam.imageLogo = photo
-                }
-                
-                try context.save()
-            } catch {
-                
-            }
-            return getTeam(team: team)
-        }
-        
-        return team
-    }
-    
     func getAllTeam() -> [Team] {
         let fetchRequest: NSFetchRequest = Team.fetchRequest()
         
         guard let teams = try? context.fetch(fetchRequest) else {
             return []
         }
-        
         return teams
     }
+    
+    func getTeamByRecordName(recordName: String) -> Team? {
+        let fetchRequest: NSFetchRequest = Team.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "recordName = %@", recordName)
+        
+        guard let team = try? context.fetch(fetchRequest).first else {
+            return nil
+        }
+        return team
+    }
+    
+    func insertBatch(teams: [TeamModel]) {
+        do {
+            teams.forEach { team in
+                let localTeam = Team(context: context)
+                localTeam.name = team.name
+                localTeam.fullname = team.fullname
+                localTeam.codeName = team.codeName
+                team.image.generateImage { photo in
+                    localTeam.imageLogo = photo
+                }
+                
+                localTeam.recordName = team.id.recordName
+            }
+            try context.save()
+            context.reset()
+            print("### \(#function): One by one inserted \(teams.count)")
+        } catch {
+            print("### \(#function): Failed to insert players in batch: \(error)")
+        }
+    }
+    
 }

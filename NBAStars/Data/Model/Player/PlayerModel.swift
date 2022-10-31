@@ -14,7 +14,7 @@ class PlayerModel {
     let backNumber: Int64
     let birthday: Date
     let image: CKAsset
-    var team: TeamModel?
+    let teamID: CKRecord.ID
     
     init?(record: CKRecord) {
         self.id = record.recordID
@@ -22,14 +22,8 @@ class PlayerModel {
         self.backNumber = record["backNumber"] as! Int64
         self.birthday = record["birthday"] as! Date
         self.image = record["imagePhoto"] as! CKAsset
+        self.teamID = (record["team"] as! CKRecord.Reference).recordID
         
-        if let teamRecords = record["team"] as? CKRecord.Reference {
-            TeamRemoteDataStore().fetchTeam(for: teamRecords) { teams in
-                self.team = teams
-                PlayerLocalDataStore().assignTeam(name: self.name, team: teams)
-                print(teams.name)
-            }
-        }
     }
 }
 

@@ -16,9 +16,10 @@ extension Team {
         return NSFetchRequest<Team>(entityName: "Team")
     }
 
-    @NSManaged public var name: String?
-    @NSManaged public var fullname: String?
-    @NSManaged public var codeName: String?
+    @NSManaged public var name: String
+    @NSManaged public var recordName: String
+    @NSManaged public var fullname: String
+    @NSManaged public var codeName: String
     @NSManaged public var division: Int16
     @NSManaged public var imageLogo: Data?
     @NSManaged public var players: NSSet?

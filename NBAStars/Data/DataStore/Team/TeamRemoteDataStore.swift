@@ -11,8 +11,7 @@ import CloudKit
 class TeamRemoteDataStore {
     
     private let database = CKManager.database
-    private(set) var team = [TeamModel]()
-    static var currentDataStore = TeamLocalDataStore()
+    private(set) var teams = [TeamModel]()
     
     func refresh(_ completion: @escaping (Error?) -> Void) {
         let predicate = NSPredicate(value: true)
@@ -30,7 +29,7 @@ class TeamRemoteDataStore {
                 return
             }
             guard let results = results else { return }
-            self.team = results.compactMap {
+            self.teams = results.compactMap {
                 TeamModel(record: $0)
             }
             DispatchQueue.main.async {
@@ -39,17 +38,4 @@ class TeamRemoteDataStore {
         }
     }
     
-    func fetchTeam(for references: CKRecord.Reference, _ completion: @escaping (TeamModel) -> Void) {
-        let recordIDs = [references.recordID]
-        let operation = CKFetchRecordsOperation(recordIDs: recordIDs)
-        operation.qualityOfService = .utility
-
-        operation.fetchRecordsCompletionBlock = { records, error in
-            let team = records?.values.map(TeamModel.init) ?? []
-            DispatchQueue.main.async {
-                completion(team[0])
-            }
-        }
-        database.add(operation)
-    }
 }

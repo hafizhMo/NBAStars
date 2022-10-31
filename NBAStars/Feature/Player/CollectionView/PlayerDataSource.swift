@@ -19,7 +19,7 @@ final class PlayerDataSource: UICollectionViewDiffableDataSource<Int, Player> {
             configuration.text = item.name
             configuration.textProperties.font = .preferredFont(forTextStyle: .subheadline)
             
-            configuration.secondaryText = item.team?.fullname
+            configuration.secondaryText = item.team?.name
             configuration.secondaryTextProperties.color = .secondaryLabel
             configuration.secondaryTextProperties.font = .preferredFont(forTextStyle: .footnote)
             
