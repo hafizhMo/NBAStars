@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 class PlayerLocalDataStore {
-
+    
     private let context = CDManager.shared.context
     
     func getAllPlayer() -> [Player] {
@@ -21,18 +21,29 @@ class PlayerLocalDataStore {
         return players
     }
     
+    func getPlayer(name: String) -> Player? {
+        let fetchRequest: NSFetchRequest = Player.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name = %@", name)
+        
+        guard let player = try? context.fetch(fetchRequest).first else {
+            return nil
+        }
+        return player
+    }
+    
     func insertBatch(players: [PlayerModel]) {
         do {
             players.forEach { player in
-                let localPlayer = Player(context: context)
-                localPlayer.name = player.name
-                localPlayer.birthday = player.birthday
-                localPlayer.backNumber = player.backNumber
-                player.image.generateImage { photo in
-                    localPlayer.imagePhoto = photo
+                if getPlayer(name: player.name) == nil {
+                    let localPlayer = Player(context: context)
+                    localPlayer.name = player.name
+                    localPlayer.birthday = player.birthday
+                    localPlayer.backNumber = player.backNumber
+                    player.image.generateImage { photo in
+                        localPlayer.imagePhoto = photo
+                    }
+                    localPlayer.team = TeamLocalDataStore().getTeamByRecordName(recordName: player.teamID.recordName)
                 }
-                
-                localPlayer.team = TeamLocalDataStore().getTeamByRecordName(recordName: player.teamID.recordName)
             }
             try context.save()
             context.reset()

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB0A234E29121E2C0098F977 /* UDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0A234D29121E2C0098F977 /* UDManager.swift */; };
+		FB0A2352291227CC0098F977 /* VersionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0A2351291227CC0098F977 /* VersionModel.swift */; };
+		FB0A2354291228DE0098F977 /* VersionRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0A2353291228DE0098F977 /* VersionRemoteDataStore.swift */; };
+		FB0A23562912A0170098F977 /* VersionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0A23552912A0170098F977 /* VersionRepository.swift */; };
 		FB7E220D290505E800BD3B43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7E220C290505E800BD3B43 /* AppDelegate.swift */; };
 		FB7E2211290505E800BD3B43 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7E2210290505E800BD3B43 /* PlayerViewController.swift */; };
 		FB7E2216290505E900BD3B43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB7E2215290505E900BD3B43 /* Assets.xcassets */; };
@@ -42,6 +46,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FB0A234D29121E2C0098F977 /* UDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDManager.swift; sourceTree = "<group>"; };
+		FB0A2351291227CC0098F977 /* VersionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionModel.swift; sourceTree = "<group>"; };
+		FB0A2353291228DE0098F977 /* VersionRemoteDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionRemoteDataStore.swift; sourceTree = "<group>"; };
+		FB0A23552912A0170098F977 /* VersionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionRepository.swift; sourceTree = "<group>"; };
 		FB7E2209290505E800BD3B43 /* NBAStars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NBAStars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB7E220C290505E800BD3B43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB7E2210290505E800BD3B43 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +98,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FB0A234C29121E0D0098F977 /* UserDefault */ = {
+			isa = PBXGroup;
+			children = (
+				FB0A234D29121E2C0098F977 /* UDManager.swift */,
+			);
+			path = UserDefault;
+			sourceTree = "<group>";
+		};
+		FB0A234F291227B80098F977 /* Version */ = {
+			isa = PBXGroup;
+			children = (
+				FB0A2353291228DE0098F977 /* VersionRemoteDataStore.swift */,
+			);
+			path = Version;
+			sourceTree = "<group>";
+		};
+		FB0A2350291227C10098F977 /* Version */ = {
+			isa = PBXGroup;
+			children = (
+				FB0A2351291227CC0098F977 /* VersionModel.swift */,
+			);
+			path = Version;
+			sourceTree = "<group>";
+		};
 		FB7E2200290505E800BD3B43 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +175,7 @@
 			children = (
 				FB7E2226290564B400BD3B43 /* PlayerRepository.swift */,
 				FB8BFA2A290F807B009FFD2D /* TeamRepository.swift */,
+				FB0A23552912A0170098F977 /* VersionRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -150,6 +183,7 @@
 		FB7E22242905648100BD3B43 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FB0A2350291227C10098F977 /* Version */,
 				FB7E224B29056A8600BD3B43 /* Position */,
 				FB7E224A29056A7C00BD3B43 /* Team */,
 				FB7E224929056A7300BD3B43 /* Player */,
@@ -160,6 +194,7 @@
 		FB7E22252905648600BD3B43 /* DataStore */ = {
 			isa = PBXGroup;
 			children = (
+				FB0A234F291227B80098F977 /* Version */,
 				FB8BFA29290F8067009FFD2D /* Team */,
 				FB7E225329057BCD00BD3B43 /* Player */,
 			);
@@ -197,10 +232,11 @@
 		FB7E22352905658A00BD3B43 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				FB7E227D29084E1900BD3B43 /* LoadingView.swift */,
+				FB7E224E29056C4800BD3B43 /* NBADivision.swift */,
 				FB7E225629057C1800BD3B43 /* CloudKit */,
 				FB7E2239290565C500BD3B43 /* CoreData */,
-				FB7E224E29056C4800BD3B43 /* NBADivision.swift */,
-				FB7E227D29084E1900BD3B43 /* LoadingView.swift */,
+				FB0A234C29121E0D0098F977 /* UserDefault */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -377,6 +413,7 @@
 				FB7E225529057BE400BD3B43 /* PlayerRemoteDataStore.swift in Sources */,
 				FB8BFA38290F8514009FFD2D /* TeamCell.swift in Sources */,
 				FB7E22322905656E00BD3B43 /* PlayerCompositional.swift in Sources */,
+				FB0A2352291227CC0098F977 /* VersionModel.swift in Sources */,
 				FB7E22342905657D00BD3B43 /* PlayerDataSource.swift in Sources */,
 				FB7E225A2905807700BD3B43 /* PlayerModel.swift in Sources */,
 				FB7E224829056A6800BD3B43 /* Position+CoreDataProperties.swift in Sources */,
@@ -384,11 +421,13 @@
 				FB7E2293290A00A600BD3B43 /* TeamLocalDataStore.swift in Sources */,
 				FB8BFA30290F81B2009FFD2D /* TeamViewController.swift in Sources */,
 				FB7E223C290565DD00BD3B43 /* NBAStars.xcdatamodeld in Sources */,
+				FB0A2354291228DE0098F977 /* VersionRemoteDataStore.swift in Sources */,
 				FB7E2295290A02C800BD3B43 /* TeamModel.swift in Sources */,
 				FB7E225829057C2800BD3B43 /* CKManager.swift in Sources */,
 				FB7E224629056A6800BD3B43 /* Team+CoreDataProperties.swift in Sources */,
 				FB7E2211290505E800BD3B43 /* PlayerViewController.swift in Sources */,
 				FB7E224429056A6800BD3B43 /* Player+CoreDataProperties.swift in Sources */,
+				FB0A234E29121E2C0098F977 /* UDManager.swift in Sources */,
 				FB8BFA33290F8285009FFD2D /* TeamCompositional.swift in Sources */,
 				FB8BFA2B290F807B009FFD2D /* TeamRepository.swift in Sources */,
 				FB7E224F29056C4800BD3B43 /* NBADivision.swift in Sources */,
@@ -396,6 +435,7 @@
 				FB7E227E29084E1900BD3B43 /* LoadingView.swift in Sources */,
 				FB7E224729056A6800BD3B43 /* Position+CoreDataClass.swift in Sources */,
 				FB7E224329056A6800BD3B43 /* Player+CoreDataClass.swift in Sources */,
+				FB0A23562912A0170098F977 /* VersionRepository.swift in Sources */,
 				FB7E222F2905655200BD3B43 /* PlayerViewModel.swift in Sources */,
 				FB7E2227290564B400BD3B43 /* PlayerRepository.swift in Sources */,
 				FB8BFA2E290F8158009FFD2D /* TeamViewModel.swift in Sources */,

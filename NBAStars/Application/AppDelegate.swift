@@ -43,5 +43,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return navigation
     }
     
+    func checkVersion(remoteVersion: String) {
+        if let version = UserDefaults.standard.version, version == remoteVersion {
+            return
+        }
+        UserDefaults.standard.version = remoteVersion
+        // save the new remote version
+        // then, start re-fetch all data again
+    }
 }
 
